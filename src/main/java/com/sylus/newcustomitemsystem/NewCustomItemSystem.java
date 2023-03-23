@@ -1,7 +1,10 @@
 package com.sylus.newcustomitemsystem;
 
 import com.sylus.newcustomitemsystem.commands.loreAddTest;
+import com.sylus.newcustomitemsystem.events.launcher;
 import com.sylus.newcustomitemsystem.handlers.playerHandler;
+import com.sylus.newcustomitemsystem.manager.cooldowns;
+import com.sylus.newcustomitemsystem.manager.itemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,9 +20,9 @@ public final class NewCustomItemSystem extends JavaPlugin {
         getCommand("loreAddTest").setExecutor(new loreAddTest());
 
         new playerHandler(this);
-        new com.sylus.newcustomitemsystem.manager.cooldowns(this);
-        new com.sylus.newcustomitemsystem.manager.itemManager();
-        new com.sylus.newcustomitemsystem.events.launcher();
+        new cooldowns(this);
+        new itemManager();
+        new launcher().launcherHandeler(this);
 
 
     }

@@ -1,5 +1,6 @@
 package com.sylus.newcustomitemsystem.commands;
 
+import com.sylus.newcustomitemsystem.NewCustomItemSystem;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class loreAddTest implements CommandExecutor {
 
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String [] args){
         if (!(sender instanceof Player)){
@@ -27,22 +29,24 @@ public class loreAddTest implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "Please have an item in your hand");
             return true;
         }
-        ItemStack item = player.getInventory().getItemInMainHand();
-        if (item.getItemMeta().hasLore() != true){
-            ItemStack heldItem = player.getInventory().getItemInMainHand();
-            ItemMeta meta = heldItem.getItemMeta();
-            List<String> newLore = new ArrayList();
-            newLore.add("New lore test");
-            meta.setLore(newLore);
-            heldItem.setItemMeta(meta);
-            player.getInventory().setItemInMainHand(heldItem);
-            player.sendMessage(ChatColor.GOLD + "Test");
-            return true;
-        }
-
-        Bukkit.getLogger().info(ChatColor.GREEN + "Test");
         ItemStack heldItem = player.getInventory().getItemInMainHand();
-        heldItem = NBTEditor.set( item, "BananaPuncher714", "any custom string key", "item", "owner" );
+        if (heldItem.getItemMeta().hasLore() != true){
+            ItemStack item = player.getItemInHand();
+            if ( item != null ) {
+                item = NBTEditor.set( item, "A VALUE", "test", "value" );
+                player.setItemInHand( item );
+                player.sendMessage( "" + NBTEditor.getString( item, "test", "value" ) );
+            }
+            return true;
+        }else {
+
+            ItemStack item = player.getItemInHand();
+            if ( item != null ) {
+                item = NBTEditor.set( item, "A VALUE", "test", "value" );
+                player.setItemInHand( item );
+                player.sendMessage( "" + NBTEditor.getString( item, "test", "value" ) );
+            }
+        Bukkit.getLogger().info(ChatColor.GREEN + "Test");
         ItemMeta meta = heldItem.getItemMeta();
         List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
         List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
@@ -52,6 +56,8 @@ public class loreAddTest implements CommandExecutor {
         player.getInventory().setItemInMainHand(heldItem);
         player.sendMessage(ChatColor.GOLD + "Test");
         return true;
+        }
 
     }
+
 }
