@@ -3,6 +3,7 @@ package com.sylus.newcustomitemsystem;
 import com.sylus.newcustomitemsystem.commands.loreAddTest;
 import com.sylus.newcustomitemsystem.events.arrow;
 import com.sylus.newcustomitemsystem.events.launcher;
+import com.sylus.newcustomitemsystem.events.menuClick;
 import com.sylus.newcustomitemsystem.handlers.playerHandler;
 import com.sylus.newcustomitemsystem.manager.cooldowns;
 import com.sylus.newcustomitemsystem.manager.itemManager;
@@ -24,6 +25,7 @@ public final class NewCustomItemSystem extends JavaPlugin {
         new itemManager();
         new launcher().launcherHandeler(this);
         new arrow().arrowHandeler(this);
+        new menuClick().menuHandeler(this);
 
 
     }

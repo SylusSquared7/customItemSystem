@@ -5,47 +5,66 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class cooldowns implements Listener {
-private static HashMap<UUID, Long> cooldown;
+    private static Map<String, List<Cooldown>> cooldowns = new HashMap<>();
 
-public static int getCooldowns(Player player, int delay){
-    return cooldownsLogic(player, delay);
-}
-    private static int cooldownsLogic(Player player, int delay){
-        if (!cooldown.containsKey(player.getUniqueId())){
-            cooldown.put(player.getUniqueId(), System.currentTimeMillis());
-            return delay / 1000;
+    public static void setCooldown(Player player, int seconds, String source) {
+        long expireTime = System.currentTimeMillis() + (seconds * 1000L);
+        List<Cooldown> playerCooldowns = cooldowns.get(player.getName());
+        if (playerCooldowns == null) {
+            playerCooldowns = new ArrayList<>();
+            cooldowns.put(player.getName(), playerCooldowns);
         }
-        long timeElapsed = System.currentTimeMillis() - cooldown.get(player.getUniqueId());
-        if (timeElapsed >= delay){
-            cooldown.remove(player.getUniqueId());
-            return 0;
-        }
-        int toReturnTimeElapsed = (int) timeElapsed / 1000;
-        return toReturnTimeElapsed;
+        playerCooldowns.add(new Cooldown(expireTime, source));
     }
 
-/*
-    public long cooldowns(Player player, int delay){
+    public static boolean hasCooldown(Player player, String source) {
+        List<Cooldown> playerCooldowns = cooldowns.get(player.getName());
+        if (playerCooldowns == null) {
+            return false;
+        }
+        playerCooldowns.removeIf(cooldown -> cooldown.getExpiration() <= System.currentTimeMillis());
+        for (Cooldown cooldown : playerCooldowns) {
+            if (cooldown.getSource().equals(source)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-
-    if (! this.cooldown.containsKey(player.getUniqueId())){
-        this.cooldown.put(player.getUniqueId(), System.currentTimeMillis());
+    public static long getCooldown(Player player, String source) {
+        List<Cooldown> playerCooldowns = cooldowns.get(player.getName());
+        if (playerCooldowns == null) {
+            return 0;
+        }
+        playerCooldowns.removeIf(cooldown -> cooldown.getExpiration() <= System.currentTimeMillis());
+        for (Cooldown cooldown : playerCooldowns) {
+            if (cooldown.getSource().equals(source)) {
+                return (cooldown.getExpiration() - System.currentTimeMillis())/1000;
+            }
+        }
         return 0;
+    }
 
-    } else {
-        //in miliseconds
-        long timeElapsed = System.currentTimeMillis() - cooldown.get(player.getUniqueId());
-        if (timeElapsed >= delay){
-            return 0;
-        }else {
-            return timeElapsed / 1000;
+    public static class Cooldown {
+
+        private long expiration;
+        private String source;
+
+        public Cooldown(long expiration, String source) {
+            this.expiration = expiration;
+            this.source = source;
+        }
+
+        public long getExpiration() {
+            return expiration;
+        }
+
+        public String getSource() {
+            return source;
         }
     }
 
-} */
 }

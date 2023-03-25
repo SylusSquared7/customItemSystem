@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
 
-import static com.sylus.newcustomitemsystem.manager.cooldowns.getCooldowns;
+
 
 public class launcher implements Listener {
 
@@ -30,25 +30,24 @@ public class launcher implements Listener {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR){
             Player player = event.getPlayer();
             if (event.getItem() != null){
+                int cooldownSeconds = 10;
                 if (player.getInventory().getItemInMainHand().getItemMeta() != null){
                     ItemStack item = event.getItem();
                     ItemStack heldItem = event.getItem();
                     if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "A VALUE")) {
-                    //   if (player.getLocation().subtract(0, 1, 0).getBlock().getType() != Material.AIR) {
-                           int delay = getCooldowns(player, 5000);
-                           if (delay == 0){
-                               player.setVelocity(player.getLocation().getDirection().multiply(0.2).setY(1));
-                           } else {
-                               player.sendMessage(ChatColor.RED + "Can't use for" + delay + " seconds");
-                           }
-
-
-                   //     }
-
-
+                        String source = "Right click Launcher";
+                        if (!cooldowns.hasCooldown(player, source)) {
+                            cooldowns.setCooldown(player, cooldownSeconds, source);
+                            player.setVelocity(player.getLocation().getDirection().multiply(0.3).setY(1));
+                        } else {
+                            event.setCancelled(true);
+                            long cooldownRemainingSeconds = cooldowns.getCooldown(player, source);
+                            player.sendMessage(ChatColor.RED + "You must wait " + cooldownRemainingSeconds + ChatColor.RED + " seconds before you can use this item again.");
+                        }
                     }
                 }
             }
         }
     }
+
 }

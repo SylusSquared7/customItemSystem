@@ -13,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
@@ -51,11 +52,11 @@ public class menu implements CommandExecutor, Listener {
         }
         //creates the item inventory
         //I might make an easier process for doing this later
-        inv.setItem(10, getItem(new ItemStack(Material.SLIME_BLOCK), "&eLeaping", "&eClick to select &8Bootsts the user up 10 blocks", "&c60 second cooldown"));
+        inv.setItem(10, getItem(new ItemStack(Material.SLIME_BLOCK), "&eLeaping", "&eClick to select &8Boosts the user up 10 blocks", "&c60 second cooldown"));
         inv.setItem(11, getItem(new ItemStack(Material.BEACON), "&bLightning", "&eClick to select &8Strikes all mobs within", "&8a 5 block range dealing 10 damage", "&c2min cooldown"));
         inv.setItem(12, getItem(new ItemStack(Material.ARROW), "&eFire an arrow", "&eClick to apply &8Fires an arrow (that's it)", "&c2 second cooldown"));
-        inv.setItem(13, getItem(new ItemStack(Material.TNT), "&eThrow TNT", "&eClick to apply &8Throws a peice of TNT that", "&8explodes after 5 seconds", "&c60 second cooldown"));
-        inv.setItem(14, getItem(new ItemStack(Material.EGG), "&eThrow an egg", "&eClick to apply &8Throws an egg (thats it)", "&c2 second cooldown"));
+        inv.setItem(13, getItem(new ItemStack(Material.TNT), "&eThrow TNT", "&eClick to apply &8Throws a piece of TNT that", "&8explodes after 5 seconds", "&c60 second cooldown"));
+        inv.setItem(14, getItem(new ItemStack(Material.EGG), "&eThrow an egg", "&eClick to apply &8Throws an egg (that's it)", "&c2 second cooldown"));
         inv.setItem(15, getItem(new ItemStack(Material.FLINT_AND_STEEL), "&eLet them burn", "&eClick to apply &8Fires a beam that sets the first", "&8person it hits on &cfire", "&c3 second cooldown"));
         inv.setItem(16, getItem(new ItemStack(Material.FEATHER), "&eLaunch", "&eClick to apply &8Lunches all entities within a 5 block", "radius up 5 blocks", "&c20 second cooldown"));
         inv.setItem(17, getItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " ", " "));
@@ -81,6 +82,7 @@ public class menu implements CommandExecutor, Listener {
         for(String s : lore){
             lores.add(ChatColor.translateAlternateColorCodes('&', s));
         }
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.setLore(lores);
         item.setItemMeta(meta);
         return item;
