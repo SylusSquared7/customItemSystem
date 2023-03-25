@@ -1,6 +1,7 @@
 package com.sylus.newcustomitemsystem;
 
 import com.sylus.newcustomitemsystem.commands.loreAddTest;
+import com.sylus.newcustomitemsystem.events.arrow;
 import com.sylus.newcustomitemsystem.events.launcher;
 import com.sylus.newcustomitemsystem.handlers.playerHandler;
 import com.sylus.newcustomitemsystem.manager.cooldowns;
@@ -20,9 +21,9 @@ public final class NewCustomItemSystem extends JavaPlugin {
         getCommand("loreAddTest").setExecutor(new loreAddTest());
 
         new playerHandler(this);
-        new cooldowns(this);
         new itemManager();
         new launcher().launcherHandeler(this);
+        new arrow().arrowHandeler(this);
 
 
     }

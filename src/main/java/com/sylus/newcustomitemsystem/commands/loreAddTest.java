@@ -31,13 +31,16 @@ public class loreAddTest implements CommandExecutor {
         }
         ItemStack heldItem = player.getInventory().getItemInMainHand();
         if (heldItem.getItemMeta().hasLore() != true){
-            ItemStack item = player.getItemInHand();
-            if ( item != null ) {
-                item = NBTEditor.set( item, "A VALUE", "test", "value" );
-                player.setItemInHand( item );
-                player.sendMessage( "" + NBTEditor.getString( item, "test", "value" ) );
-            }
-            return true;
+                ItemMeta meta = heldItem.getItemMeta();
+                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                lore.add("New lore test");
+                meta.setLore(lore);
+                heldItem.setItemMeta(meta);
+                player.getInventory().setItemInMainHand(heldItem);
+                heldItem = NBTEditor.set( heldItem, "A VALUE", "test", "value" );
+                player.setItemInHand( heldItem );
+                player.sendMessage(ChatColor.GOLD + "Test");
+                return true;
         }else {
 
             ItemStack item = player.getItemInHand();
