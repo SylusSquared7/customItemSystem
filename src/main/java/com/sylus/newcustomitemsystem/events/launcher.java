@@ -34,7 +34,7 @@ public class launcher implements Listener {
                 if (player.getInventory().getItemInMainHand().getItemMeta() != null){
                     ItemStack item = event.getItem();
                     ItemStack heldItem = event.getItem();
-                    if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "A VALUE")) {
+                    if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "LAUNCHER")) {
                         String source = "Right click Launcher";
                         if (!cooldowns.hasCooldown(player, source)) {
                             cooldowns.setCooldown(player, cooldownSeconds, source);
