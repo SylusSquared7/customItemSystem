@@ -6,47 +6,43 @@ import io.github.bananapuncher714.nbteditor.NBTEditor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.entity.*;
-import org.bukkit.event.Event;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
-public class arrow implements Listener {
-    public void arrowHandeler(NewCustomItemSystem plugin){
+public class lightningStrike implements Listener {
+    public void lightningHandeler(NewCustomItemSystem plugin){
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
+            Player player = event.getPlayer();
             if (event.getItem() != null) {
-                int cooldownSeconds = 1;
+                int cooldownSeconds = 60;
                 if (player.getInventory().getItemInMainHand().getItemMeta() != null) {
                     ItemStack item = event.getItem();
                     ItemStack heldItem = event.getItem();
-                    if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "ARROW")) {
-                        String source = "Right click Arrow";
+                    if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "LIGHTNING")) {
+                        String source = "Right click lightning";
                         if (!cooldowns.hasCooldown(player, source)) {
                             cooldowns.setCooldown(player, cooldownSeconds, source);
-                            // Get the player's location and direction
-                            Location location = player.getLocation();
-                            Vector direction = location.getDirection();
-
-                            // Create a new arrow and set its initial position and velocity
-                            Arrow arrow = player.launchProjectile(Arrow.class, direction);
-                            // Edit pickup status
-                            arrow.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
-                            // Edit velocity
-                            arrow.setVelocity(direction.multiply(2));
+                            for (Entity entity : player.getNearbyEntities(5,5,5)){
+                                if (entity instanceof LivingEntity){
+                                    LivingEntity livingentity = (LivingEntity) entity;
+                                    livingentity.getWorld().strikeLightningEffect(livingentity.getLocation());
+                                    livingentity.damage(10);
+                                }
+                            }
                         } else {
                             event.setCancelled(true);
                             long cooldownRemainingSeconds = cooldowns.getCooldown(player, source);

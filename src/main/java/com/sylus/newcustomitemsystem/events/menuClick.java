@@ -44,6 +44,7 @@ public class menuClick implements Listener {
                                 ItemMeta meta = heldItem.getItemMeta();
                                 List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
                                 lore.add("§eRIGHT CLICK ABILITY: " + "§7Launch up about 6 blocks");
+                                lore.add("§c10 second cooldown");
                                 meta.setLore(lore);
                                 heldItem.setItemMeta(meta);
                                 player.getInventory().setItemInMainHand(heldItem);
@@ -69,9 +70,42 @@ public class menuClick implements Listener {
                         } else {
                             player.sendMessage(ChatColor.RED + "Item already has this attribute");
                         }
+                        break;
                     case BEACON:
-                        player.sendMessage(ChatColor.RED + "COMING SOON");
-                        System.out.println("TEST BECON");
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "LIGHTNING")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Strikes every mob with lightning dealing 5 hearts");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "LIGHTNING", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "LIGHTNING", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Launch up about 6 blocks");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+
+                        break;
 
                     case ARROW:
                         player.closeInventory();
@@ -80,6 +114,7 @@ public class menuClick implements Listener {
                                 ItemMeta meta = heldItem.getItemMeta();
                                 List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
                                 lore.add("§eRIGHT CLICK ABILITY: " + "§7Fire an arrow (That's it)");
+                                lore.add("§c1 second cooldown");
                                 meta.setLore(lore);
                                 heldItem.setItemMeta(meta);
                                 player.getInventory().setItemInMainHand(heldItem);
