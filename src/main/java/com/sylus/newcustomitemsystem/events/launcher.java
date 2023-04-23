@@ -7,6 +7,7 @@ import net.md_5.bungee.api.chat.hover.content.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -39,6 +40,7 @@ public class launcher implements Listener {
                         if (!cooldowns.hasCooldown(player, source)) {
                             cooldowns.setCooldown(player, cooldownSeconds, source);
                             player.setVelocity(player.getLocation().getDirection().multiply(0.3).setY(1));
+                            player.playSound(player.getLocation(), Sound.ENTITY_SLIME_JUMP_SMALL, 1 ,1);
                         } else {
                             event.setCancelled(true);
                             long cooldownRemainingSeconds = cooldowns.getCooldown(player, source);

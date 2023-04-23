@@ -140,11 +140,193 @@ public class menuClick implements Listener {
                         } else {
                             player.sendMessage(ChatColor.RED + "Item already has this attribute");
                         }
+                        break;
+                    case TNT:
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "ARROW")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Throws a peice of TNT that explodes after 5s)");
+                                lore.add("§c30 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "TNTTHROW", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "TNTTHROW", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Throws a peice of TNT that explodes after 5s)");
+                                lore.add("§c30 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+                        break;
+                    case EGG:
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "EGGTHROW")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Chucks an egg (Thats it)");
+                                lore.add("§c1 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "EGGTHROW", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "EGGTHROW", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Chucks an egg (Thats it)");
+                                lore.add("§c1 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+                        break;
+                    case FLINT_AND_STEEL:
+                        player.sendMessage(ChatColor.RED + "Work in progress");
+                        break;
+                    case FEATHER:
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "OTHERLAUNCHER")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Launches all entities in a 5 block radius");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "OTHERLAUNCHER", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "OTHERLAUNCHER", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Launches all entities in a 5 block radius");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+                        break;
+                    case ANVIL:
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "ANVILRAIN")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Fires anvils in a line");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "ANVILRAIN", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "ANVILRAIN", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Fires anvils in a line");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "This item may not work correctly");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+                        break;
+                    case SPECTRAL_ARROW:
+                        player.closeInventory();
+                        if (!Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "GLOWOING")) {
+                            if (heldItem.getItemMeta().hasLore() != true) {
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Gives all entities in a 30 block radius a glowing effect for 30s");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                heldItem = NBTEditor.set(heldItem, "GLOWOING", "test", "value");
+                                player.setItemInHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            } else {
+
+                                ItemStack item = player.getItemInHand();
+                                if (item != null) {
+                                    item = NBTEditor.set(item, "GLOWOING", "test", "value");
+                                    player.setItemInHand(item);
+                                }
+                                ItemMeta meta = heldItem.getItemMeta();
+                                List oldMeta = player.getInventory().getItemInMainHand().getItemMeta().getLore();
+                                List<String> lore = meta.hasLore() ? meta.getLore() : new ArrayList<>();
+                                lore.add("§eRIGHT CLICK ABILITY: " + "§7Gives all entities in a 30 block radius a glowing effect for 30s");
+                                lore.add("§c60 second cooldown");
+                                meta.setLore(lore);
+                                heldItem.setItemMeta(meta);
+                                player.getInventory().setItemInMainHand(heldItem);
+                                player.sendMessage(ChatColor.GOLD + "Test");
+                            }
+                        } else {
+                            player.sendMessage(ChatColor.RED + "Item already has this attribute");
+                        }
+                        break;
+
+
                 }
 
             } catch (NullPointerException e){
 
             }
+
         }
         }
 
