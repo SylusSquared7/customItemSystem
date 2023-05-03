@@ -12,31 +12,29 @@ For example you can choose a stick as an item and make it shoot arrows when righ
 Another example is you can get a sword and make it launch the player up when they right click
 Another example is you can take a pair of boots and make them launch you up when you press shift
 
-This plugin will be built for 1.8 and WILL NOT have multiple effects on one item
-
 Ideas for custom properties:
 
 Items:
 
-Right click the item and it will launch the player up 10 blocks
+Right click the item and it will launch the player up 10 blocks **DONE**
 
-Right click an item and it will strike lightning on everything within 5 blocks doing 10 damage
+Right click an item and it will strike lightning on everything within 5 blocks doing 10 damage **DONE**
 
-Right click an item and it will shoot an arrow that damages anything in it's path
+Right click an item and it will shoot an arrow that damages anything in it's path **DONE**
 
-Right click an item and it will throw a peice of TNT that will explode after 5 seconds
+Right click an item and it will throw a peice of TNT that will explode after 5 seconds **DONE**
 
-Right click an item and it will shoot an egg
+Right click an item and it will shoot an egg  **DONE**
 
 Right click an item and it will set anything in it's path on fire
 
-Right click an item and it will launch all entities in a 5 block radius up 20 blocks
+Right click an item and it will launch all entities in a 5 block radius up 20 blocks **DONE**
 
 Right click an item and it will rain anvils from the sky
 
 Right click an item and it will have a 20% cahance to give you a gapple if you dont get it then you take 5 damage
 
-Final one Right click an item and it will give all entities within a 30 block radius glow effect
+Final one Right click an item and it will give all entities within a 30 block radius glow effect **DONE**
 
 (An example of the GUI)
 ![The image](https://github.com/SylusSquared7/customItemSystem/tree/main/Images/ItemDemo.png?raw=true)
@@ -73,3 +71,5 @@ Backend plugin ideas:
 3.Admin plugin. Allows trusted people, added with /trust add {admin or mod}, to give someone a rank choosing from defult, recognised and OP using the command /promote {defult, recognised and OP} I also need to make a ranks plugin for this one. This will use mongoDB
 
 2.Testing plugin, uses a mongoDB databse to add tests. Users can then use a GUI to select tests and say if they were a sucsess or not and can add notes if they want. The GUI will dispaly all open tests
+
+3.A hybrid anticheat
