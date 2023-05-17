@@ -44,7 +44,7 @@ public class glowEffect implements Listener {
                             for (Entity entity : player.getNearbyEntities(20,20,20)){
                                 if (entity instanceof LivingEntity){
                                     LivingEntity livingentity = (LivingEntity) entity;
-                                    livingentity.addPotionEffect(new PotionEffect(GLOWING, 30, 1));
+                                    livingentity.addPotionEffect(new PotionEffect(GLOWING, 6600, 1));
                                     if (livingentity instanceof Player){
                                         Player playerEntity = ((Player) livingentity).getPlayer();
                                         playerEntity.sendMessage(ChatColor.GOLD + "You are now glowing for 30s");

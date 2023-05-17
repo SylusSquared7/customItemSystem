@@ -29,6 +29,7 @@ public class tntThrow implements Listener {
             if (player.getInventory().getItemInMainHand().getItemMeta() != null){
                 ItemStack heldItem = player.getInventory().getItemInMainHand();
                 if (Objects.equals(NBTEditor.getString(heldItem, "test", "value"), "TNTTHROW")) {
+                    int cooldownSeconds = 60;
                     String source = "TNT Throw";
                     if (!cooldowns.hasCooldown(player, source)) {
                         Location location = player.getLocation();
@@ -38,6 +39,7 @@ public class tntThrow implements Listener {
                         TNTPrimed tnt = (TNTPrimed) world.spawnEntity(location, EntityType.PRIMED_TNT);
                         tnt.setFuseTicks(80);
                         tnt.setVelocity(direction.multiply(2));
+                        cooldowns.setCooldown(player, cooldownSeconds, source);
                     } else {
                         event.setCancelled(true);
                         long cooldownRemainingSeconds = cooldowns.getCooldown(player, source);
